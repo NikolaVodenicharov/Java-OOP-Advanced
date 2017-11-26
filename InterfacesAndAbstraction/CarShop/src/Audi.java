@@ -1,18 +1,29 @@
-import java.io.Serializable;
-
-public class Seat implements Sellable, Serializable {
+public class Audi implements Rentable {
     private String model;
     private String color;
     private Integer horsePower;
     private String countryProduced;
-    private Double price;
+    private Integer minRentDay;
+    private Double pricePerDay;
 
-    public Seat(String model, String color, Integer horsePower, String countryProduced, Double price) {
+
+    public Audi(String model, String color, Integer horsePower, String countryProduced, Integer minRendDay, Double pricePerDay){
         this.model = model;
         this.color = color;
         this.horsePower = horsePower;
         this.countryProduced = countryProduced;
-        this.price = price;
+        this.minRentDay = minRendDay;
+        this.pricePerDay = pricePerDay;
+    }
+
+    @Override
+    public Integer getMinRentDay() {
+        return this.minRentDay;
+    }
+
+    @Override
+    public Double getPricePerDay() {
+        return this.pricePerDay;
     }
 
     @Override
@@ -31,12 +42,7 @@ public class Seat implements Sellable, Serializable {
     }
 
     @Override
-    public Double getPrice() {
-        return this.price;
-    }
-
-    @Override
-    public String toString() {
+    public String toString(){
         String formatted =
                 String.format(
                         "This is %s produced in %s and have %d tires",
@@ -47,5 +53,3 @@ public class Seat implements Sellable, Serializable {
         return formatted;
     }
 }
-
-
