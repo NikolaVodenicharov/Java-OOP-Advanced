@@ -1,10 +1,14 @@
-public class Citizen implements Person{
+public class Citizen implements Person, Identifiable, Birthable{
     private String name;
     private Integer age;
+    private String id;
+    private String birthdate;
 
-    public Citizen(String name, Integer age) {
+    public Citizen(String name, Integer age, String id, String birthdate) {
         this.name = name;
         this.age = age;
+        this.id = id;
+        this.birthdate = birthdate;
     }
 
     @Override
@@ -15,5 +19,15 @@ public class Citizen implements Person{
     @Override
     public Integer getAge() {
         return this.age;
+    }
+
+    @Override
+    public String getId() {
+        return this.id;
+    }
+
+    @Override
+    public String getBirthdate() {
+        return this.birthdate;
     }
 }
