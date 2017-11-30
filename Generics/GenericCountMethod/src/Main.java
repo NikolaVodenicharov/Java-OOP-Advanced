@@ -10,20 +10,20 @@ public class Main {
         InputStreamReader streamReader = new InputStreamReader(System.in);
         BufferedReader reader = new BufferedReader(streamReader);
 
-        List<String> elements = readInputLines(reader);
-        String target = reader.readLine();
+        List<Double> elements = readInputLines(reader);
+        Double target = Double.parseDouble(reader.readLine());
 
         int count = countGreaterCount(elements, target);
 
         System.out.println(count);
     }
 
-    public static List<String> readInputLines(BufferedReader reader) throws IOException {
+    public static List<Double> readInputLines(BufferedReader reader) throws IOException {
         int n = Integer.parseInt(reader.readLine());
-        List<String> elements = new ArrayList<>(n);
+        List<Double> elements = new ArrayList<>(n);
 
         for (int i = 0; i < n; i++) {
-            elements.add(reader.readLine());
+            elements.add(Double.parseDouble(reader.readLine()));
         }
 
         return elements;
