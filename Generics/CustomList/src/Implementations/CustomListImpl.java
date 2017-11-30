@@ -1,11 +1,15 @@
+package Implementations;
+
+import Interfaces.CustomList;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CustomList <T extends Comparable<T>> {
+public class CustomListImpl<T extends Comparable<T>> implements CustomList<T> {
     private List<T> elements;
 
-    public CustomList (){
+    public CustomListImpl(){
         this.elements = new ArrayList<>();
     }
 

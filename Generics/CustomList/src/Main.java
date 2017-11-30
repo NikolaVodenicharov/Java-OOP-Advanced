@@ -1,3 +1,6 @@
+import Implementations.CustomListImpl;
+import Interfaces.CustomList;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,7 +10,7 @@ public class Main {
         InputStreamReader streamReader = new InputStreamReader(System.in);
         BufferedReader reader = new BufferedReader(streamReader);
 
-        CustomList<String> elements = new CustomList<>();
+        CustomList<String> elements = new CustomListImpl<>();
 
         while(true){
             String inputLine = reader.readLine();
