@@ -9,9 +9,12 @@ public class Main {
 
         int n = Integer.parseInt(reader.readLine());
         for (int i = 0; i < n; i++) {
-            Box<String> box = new Box<>(reader.readLine());
+            Box<Integer> box =
+                    new Box<>(
+                    Integer.parseInt(
+                            reader.readLine()));
+
             System.out.println(box.toString());
-            
         }
     }
 }
