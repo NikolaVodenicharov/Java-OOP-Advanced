@@ -1,5 +1,7 @@
 import Implementations.CustomListImpl;
+import Implementations.SorterImpl;
 import Interfaces.CustomList;
+import Interfaces.Sorter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -64,6 +66,10 @@ public class Main {
                 break;
             case "Print":
                 System.out.println(elements);
+                break;
+            case "Sort":
+                Sorter<String> sorter = new SorterImpl<>();
+                sorter.sort(elements);
                 break;
             default:
                 break;

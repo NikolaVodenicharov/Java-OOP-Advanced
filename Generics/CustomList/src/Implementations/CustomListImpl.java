@@ -3,6 +3,7 @@ package Implementations;
 import Interfaces.CustomList;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -65,6 +66,17 @@ public class CustomListImpl<T extends Comparable<T>> implements CustomList<T> {
 
         return min;
     }
+
+    @Override
+    public T get(int index) {
+        return this.elements.get(index);
+    }
+
+    @Override
+    public int size() {
+        return this.elements.size();
+    }
+
     public String toString(){
         StringBuilder formatted = new StringBuilder();
         for (T element : this.elements) {
