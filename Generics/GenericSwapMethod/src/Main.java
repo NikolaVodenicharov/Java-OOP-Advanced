@@ -9,7 +9,7 @@ public class Main {
         InputStreamReader streamReader = new InputStreamReader(System.in);
         BufferedReader reader = new BufferedReader(streamReader);
 
-        Container<String> elements = readStringElements(reader);
+        Container<Integer> elements = readStringElements(reader);
 
         Integer[] indexes =
                 Arrays.stream(
@@ -25,13 +25,13 @@ public class Main {
         System.out.println(elements);
     }
 
-    public static Container<String> readStringElements(BufferedReader reader) throws IOException {
-        Container<String> elements = new Container(new ArrayList<String>());
+    public static Container<Integer> readStringElements(BufferedReader reader) throws IOException {
+        Container<Integer> elements = new Container(new ArrayList<String>());
 
         int n = Integer.parseInt(reader.readLine());
 
         for (int i = 0; i < n; i++) {
-            elements.addElement(reader.readLine());
+            elements.addElement(Integer.parseInt(reader.readLine()));
         }
 
         return elements;
