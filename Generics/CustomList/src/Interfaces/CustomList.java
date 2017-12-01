@@ -2,7 +2,7 @@ package Interfaces;
 
 import java.util.Collection;
 
-public interface CustomList<T extends Comparable<T>> {
+public interface CustomList<T extends Comparable<T>> extends Iterable<T>{
     void add(T element);
     void remove(int index);
     boolean contains(T element);

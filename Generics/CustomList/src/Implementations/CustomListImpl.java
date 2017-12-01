@@ -2,10 +2,8 @@ package Implementations;
 
 import Interfaces.CustomList;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.function.Consumer;
 
 public class CustomListImpl<T extends Comparable<T>> implements CustomList<T> {
     private List<T> elements;
@@ -86,5 +84,34 @@ public class CustomListImpl<T extends Comparable<T>> implements CustomList<T> {
         }
 
         return formatted.toString().trim();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            @Override
+            public boolean hasNext() {
+                return false;
+            }
+
+            @Override
+            public T next() {
+                return null;
+            }
+        };
+    }
+
+    private class CustomListInterator implements Iterator<T>{
+        int index = 0;
+
+        @Override
+        public boolean hasNext() {
+            return index < elements.size();
+        }
+
+        @Override
+        public T next() {
+            return elements.get(index++);
+        }
     }
 }
