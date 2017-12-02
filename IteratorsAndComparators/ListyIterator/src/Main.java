@@ -55,6 +55,9 @@ public class Main {
             case "Print":
                 elements.print();
                 break;
+            case "PrintAll":
+                elements.printAll();
+                break;
             case "HasNext":
                 System.out.println(elements.hasNext());
                 break;

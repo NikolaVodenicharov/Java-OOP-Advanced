@@ -1,6 +1,7 @@
+import java.util.Iterator;
 import java.util.List;
 
-public class ListyIterator<T> {
+public class ListyIterator<T> implements Iterable<T>{
     private List<T> elements;
     private int currentIdex;
 
@@ -31,5 +32,36 @@ public class ListyIterator<T> {
             throw new IllegalArgumentException("Invalid Operation!");
         }
         System.out.println(this.elements.get(currentIdex));
+    }
+
+    public void printAll(){
+        StringBuilder formatted = new StringBuilder();
+
+        for (T element : elements) {
+            formatted
+                    .append(element)
+                    .append(" ");
+        }
+
+        System.out.println(formatted.toString().trim());
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new IteratorOfListyIterator();
+    }
+
+    private class IteratorOfListyIterator implements Iterator<T>{
+        int index = 0;
+
+        @Override
+        public boolean hasNext() {
+            return this.index < elements.size();
+        }
+
+        @Override
+        public T next() {
+            return elements.get(this.index++);
+        }
     }
 }
