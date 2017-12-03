@@ -1,4 +1,4 @@
-public class Card {
+public class Card implements Comparable<Card>{
     private CardRank rank;
     private CardSuit suit;
 
@@ -22,5 +22,10 @@ public class Card {
                         this.calculateCardPower());
 
         return formatted;
+    }
+
+    @Override
+    public int compareTo(Card other) {
+        return this.calculateCardPower() - other.calculateCardPower();
     }
 }
