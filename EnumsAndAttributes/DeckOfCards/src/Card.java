@@ -16,10 +16,9 @@ public class Card implements Comparable<Card>{
     public String toString(){
         String formatted =
                 String.format(
-                        "Card name: %s of %s; Card power: %d",
+                        "%s of %s",
                         this.rank.name(),
-                        this.suit.name(),
-                        this.calculateCardPower());
+                        this.suit.name());
 
         return formatted;
     }
