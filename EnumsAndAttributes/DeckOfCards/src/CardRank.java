@@ -1,3 +1,4 @@
+@CardsAnnotation(type = "Enumeration", category = "Rank", description = "Provides rank constants for a Card class.")
 public enum CardRank {
     ACE(14),
     TWO(2),

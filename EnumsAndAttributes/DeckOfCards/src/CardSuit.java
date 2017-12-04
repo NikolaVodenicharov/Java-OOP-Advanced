@@ -1,3 +1,4 @@
+@CardsAnnotation(type = "Enumeration", category = "Suit", description = "Provides suit constants for a Card class.")
 public enum CardSuit {
     CLUBS(0),
     DIAMONDS(13),

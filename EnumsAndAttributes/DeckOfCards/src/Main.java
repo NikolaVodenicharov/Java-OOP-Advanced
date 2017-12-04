@@ -7,14 +7,29 @@ public class Main {
         InputStreamReader streamReader = new InputStreamReader(System.in);
         BufferedReader reader = new BufferedReader(streamReader);
 
-        Card card1 = readCard(reader);
-        Card card2 = readCard(reader);
+        String command = reader.readLine();
 
-        if (card1.compareTo(card2) >= 0){
-            System.out.println(card1);
+        if (command.equals("Rank")){
+            Class cl = CardRank.class;
+            CardsAnnotation annotation = (CardsAnnotation) cl.getAnnotation(CardsAnnotation.class);
+
+            String formatted =
+                    String.format(
+                            "Type = %s, Description = %s",
+                            annotation.type(),
+                            annotation.description());
+            System.out.println(formatted);
         }
         else{
-            System.out.println(card2);
+            Class cl = CardSuit.class;
+            CardsAnnotation annotation = (CardsAnnotation) cl.getAnnotation(CardsAnnotation.class);
+
+            String formatted =
+                    String.format(
+                            "Type = %s, Description = %s",
+                            annotation.type(),
+                            annotation.description());
+            System.out.println(formatted);
         }
     }
 
