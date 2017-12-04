@@ -3,47 +3,45 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         InputStreamReader streamReader = new InputStreamReader(System.in);
         BufferedReader reader = new BufferedReader(streamReader);
 
-        Collection<Card> deck = createCardDeck();
-        String formatted = collectionToString(deck, System.lineSeparator());
-        System.out.println(formatted);
+        Deck deck = new Deck();
+
+        Player player1 = new Player(reader.readLine(), new ArrayList<>());
+        Player player2 = new Player(reader.readLine(), new ArrayList<>());
+
+        giveCards(reader, deck, player1, 5);
+        giveCards(reader, deck, player2, 5);
+
+        if (player1.findStrongesCard().compareTo(player2.findStrongesCard()) >= 0){
+            printWinner(player1);
+        }
+        else{
+            printWinner(player2);
+        }
     }
 
-    private static Card readCard(BufferedReader reader) throws IOException {
-        String rank = reader.readLine();
-        String suit = reader.readLine();
-
-        Card card = new Card(rank, suit);
-
-        return card;
-    }
-    private static Collection<Card> createCardDeck(){
-        List<Card> deck = new ArrayList<>(52);
-
-        for (CardSuit cardSuit : CardSuit.values()) {
-            for (CardRank cardRank : CardRank.values()) {
-                Card card = new Card(cardRank.name(), cardSuit.name());
-                deck.add(card);
+    private static void giveCards(BufferedReader reader, Deck deck, Player player, int cardsNumber) throws IOException{
+        while(player.handCardsCount() < cardsNumber){
+            try {
+                String cardName = reader.readLine();
+                Card card = deck.takeCard(cardName);
+                player.addCard(card);
+            }
+            catch(IllegalArgumentException | IllegalStateException e){
+                System.out.println(e.getMessage());
             }
         }
-
-        return deck;
     }
-    private static <T> String collectionToString (Collection<T> elements, Object connector){
-        StringBuilder formatted = new StringBuilder();
-        for (T element : elements) {
-            formatted
-                    .append(element)
-                    .append(connector);
-        }
-
-        return formatted.toString().trim();
+    private static void printWinner(Player player){
+        System.out.println(
+                String.format(
+                        "%s wins with %s.",
+                        player.getName(),
+                        player.findStrongesCard().getName()));
     }
-
 }
