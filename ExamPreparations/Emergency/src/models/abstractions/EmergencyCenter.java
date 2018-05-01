@@ -1,13 +1,15 @@
 package models.abstractions;
 
-public abstract class EmergencyCenter {
+import java.util.Collection;
+
+public abstract class  EmergencyCenter {
 
     private String name;
-    private Integer emergenciesLimitBeforeRetire;
+    private Integer emergencyLeft;
 
-    protected EmergencyCenter(String name, Integer emergenciesLimitBeforeRetire) {
-        this.setName(name);
-        this.setEmergenciesLimitBeforeRetire(emergenciesLimitBeforeRetire);
+    public EmergencyCenter(String name, Integer emergencyLeft) {
+        setName(name);
+        setEmergencyLeft(emergencyLeft);
     }
 
     public String getName() {
@@ -17,12 +19,18 @@ public abstract class EmergencyCenter {
         this.name = name;
     }
 
-    public Integer getEmergenciesLimitBeforeRetire() {
-        return emergenciesLimitBeforeRetire;
+    public Integer getEmergencyLeft() {
+        return emergencyLeft;
     }
-    private void setEmergenciesLimitBeforeRetire(Integer emergenciesLimitBeforeRetire) {
-        this.emergenciesLimitBeforeRetire = emergenciesLimitBeforeRetire;
+    private void setEmergencyLeft(Integer emergencyLeft) {
+        this.emergencyLeft = emergencyLeft;
     }
 
-    public abstract Boolean isForRetirement();
+    public abstract Collection<? extends Emergency> getEmergencies();
+
+    public boolean isForRetirement(){
+        boolean isRetirementTime = emergencyLeft == 0;
+
+        return isRetirementTime;
+    }
 }

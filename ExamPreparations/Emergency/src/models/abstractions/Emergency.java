@@ -10,7 +10,7 @@ public abstract class Emergency {
 
     private RegistrationTime registrationTime;
 
-    protected Emergency(
+    public Emergency(
             String description,
             EmergencyLevel emergencyLevel,
             RegistrationTime registrationTime) {
