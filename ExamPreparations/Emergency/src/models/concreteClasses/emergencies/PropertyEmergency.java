@@ -8,7 +8,7 @@ public class PropertyEmergency extends Emergency {
 
     private int propertyDamage;
 
-    protected PropertyEmergency(
+    public PropertyEmergency(
             String description,
             EmergencyLevel emergencyLevel,
             RegistrationTime registrationTime,

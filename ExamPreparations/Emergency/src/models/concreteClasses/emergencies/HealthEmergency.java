@@ -8,7 +8,7 @@ public class HealthEmergency extends Emergency {
 
     private int casualtiesCount;
 
-    protected HealthEmergency(
+    public HealthEmergency(
             String description,
             EmergencyLevel emergencyLevel,
             RegistrationTime registrationTime,

@@ -9,7 +9,7 @@ public class OrderEmergency extends Emergency {
 
     private OrderEmergencyStatus status;
 
-    protected OrderEmergency(
+    public OrderEmergency(
             String description,
             EmergencyLevel emergencyLevel,
             RegistrationTime registrationTime,
