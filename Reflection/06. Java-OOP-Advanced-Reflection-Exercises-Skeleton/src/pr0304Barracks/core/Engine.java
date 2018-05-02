@@ -2,29 +2,25 @@ package pr0304Barracks.core;
 
 import pr0304Barracks.contracts.*;
 import pr0304Barracks.contracts.Runnable;
+import pr0304Barracks.io.abstractions.Reader;
+import pr0304Barracks.io.abstractions.Writer;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Engine implements Runnable {
 
-	//private Repository repository;
-	//private UnitFactory unitFactory;
-	//private CommandFactory commandFactory;
 	private CommandInterpreter commandInterpreter;
+	private Reader reader;
+	private Writer writer;
 
-	public Engine(CommandInterpreter commandInterpreter) {
-
-		//this.repository = repository;
-		//this.unitFactory = unitFactory;
-		//this.commandFactory = commandFactory;
+	public Engine(CommandInterpreter commandInterpreter, Reader reader, Writer writer) {
 		this.commandInterpreter = commandInterpreter;
+		this.reader = reader;
+		this.writer = writer;
 	}
 
 	@Override
 	public void run() {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 		while (true) {
 			try {
@@ -37,9 +33,9 @@ public class Engine implements Runnable {
 					break;
 				}
 
-				System.out.println(result);
+				writer.writeLine(result);
 			} catch (RuntimeException e) {
-				System.out.println(e.getMessage());
+				writer.writeLine(e.getMessage());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
