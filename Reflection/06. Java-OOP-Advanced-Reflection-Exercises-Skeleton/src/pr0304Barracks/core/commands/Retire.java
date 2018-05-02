@@ -1,7 +1,6 @@
 package pr0304Barracks.core.commands;
 
 import pr0304Barracks.contracts.Repository;
-import pr0304Barracks.contracts.Unit;
 import pr0304Barracks.contracts.UnitFactory;
 
 public class Retire extends Command {
@@ -16,8 +15,8 @@ public class Retire extends Command {
 
     @Override
     public String execute() {
-        String unitType = super.getData()[1];
-        super.getRepository().removeUnit(unitType);
+        String unitType = this.getData()[1];
+        this.getRepository().removeUnit(unitType);
         String output = unitType + " retired!";
 
         return output;

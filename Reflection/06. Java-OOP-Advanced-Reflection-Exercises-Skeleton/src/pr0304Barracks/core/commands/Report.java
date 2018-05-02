@@ -15,7 +15,7 @@ public class Report extends Command {
 
     @Override
     public String execute() {
-        String output = super.getRepository().getStatistics();
+        String output = this.getRepository().getStatistics();
 
         return output;
     }

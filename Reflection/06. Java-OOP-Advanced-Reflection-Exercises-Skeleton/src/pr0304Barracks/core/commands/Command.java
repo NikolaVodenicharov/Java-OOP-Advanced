@@ -10,7 +10,7 @@ public abstract class Command implements Executable {
     private Repository repository;
     private UnitFactory unitFactory;
 
-    public Command(
+    protected Command(
             String[] data,
             Repository repository,
             UnitFactory unitFactory){
