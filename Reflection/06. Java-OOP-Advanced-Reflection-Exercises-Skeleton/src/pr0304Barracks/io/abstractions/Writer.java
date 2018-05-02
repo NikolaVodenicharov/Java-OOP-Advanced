@@ -1,5 +1,5 @@
-package io.abstractions;
+package pr0304Barracks.io.abstractions;
 
 public interface Writer {
-    void write(String text);
+    void writeLine(String text);
 }

@@ -1,7 +1,7 @@
-package io.abstractions;
+package pr0304Barracks.io.abstractions;
 
 import java.io.IOException;
 
 public interface Reader {
-    String read() throws IOException;
+    String readLine() throws IOException;
 }
