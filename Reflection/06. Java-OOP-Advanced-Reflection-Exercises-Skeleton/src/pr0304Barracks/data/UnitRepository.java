@@ -39,7 +39,12 @@ public class UnitRepository implements Repository {
 	}
 
 	public void removeUnit(String unitType) {
-		// TODO: implement for problem 4
-		throw new NotImplementedException();
+
+		if (!amountOfUnits.containsKey(unitType) || amountOfUnits.get(unitType) == 0){
+			throw new IllegalArgumentException("No such units in repository.");
+		}
+
+		int newAmount = this.amountOfUnits.get(unitType) - 1;
+		amountOfUnits.put(unitType, newAmount);
 	}
 }
