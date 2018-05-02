@@ -1,8 +1,11 @@
 package pr0304Barracks.core.factories;
 
+import jdk.nashorn.api.tree.TryTree;
 import pr0304Barracks.contracts.Unit;
 import pr0304Barracks.contracts.UnitFactory;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.lang.reflect.Constructor;
 
 public class UnitFactoryImpl implements UnitFactory {
 
@@ -11,7 +14,19 @@ public class UnitFactoryImpl implements UnitFactory {
 
 	@Override
 	public Unit createUnit(String unitType) {
-		// TODO: implement for problem 3
-		throw new NotImplementedException();
+		Unit unit = null;
+
+		try{
+			Class unitClass = Class.forName(UNITS_PACKAGE_NAME + unitType);
+			Constructor constructor = unitClass.getConstructor();
+			unit = (Unit) constructor.newInstance();
+
+			return unit;
+		}
+		catch(ReflectiveOperationException e){
+			e.printStackTrace();
+		}
+
+		return unit;
 	}
 }
