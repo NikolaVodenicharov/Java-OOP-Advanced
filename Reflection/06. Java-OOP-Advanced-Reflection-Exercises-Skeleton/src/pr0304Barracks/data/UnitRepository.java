@@ -26,16 +26,16 @@ public class UnitRepository implements Repository {
 	}
 
 	public String getStatistics() {
-		StringBuilder statBuilder = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		for (Map.Entry<String, Integer> entry : amountOfUnits.entrySet()) {
-			String formatedEntry =
+			String formattedEntry =
 					String.format("%s -> %d%n", entry.getKey(), entry.getValue());
-			statBuilder.append(formatedEntry);
+			sb.append(formattedEntry);
 		}
-		statBuilder.setLength(
-				statBuilder.length() - System.lineSeparator().length());
+		sb.setLength(
+				sb.length() - System.lineSeparator().length());
 
-		return statBuilder.toString();
+		return sb.toString();
 	}
 
 	public void removeUnit(String unitType) {

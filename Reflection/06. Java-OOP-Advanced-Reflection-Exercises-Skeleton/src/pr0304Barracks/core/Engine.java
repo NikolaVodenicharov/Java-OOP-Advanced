@@ -28,7 +28,7 @@ public class Engine implements Runnable {
 				String input = reader.readLine();
 				String[] data = input.split("\\s+");
 				String commandName = data[0];
-				String result = interpredCommand(data, commandName);
+				String result = interpretCommand(data, commandName);
 				if (result.equals("fight")) {
 					break;
 				}
@@ -42,7 +42,7 @@ public class Engine implements Runnable {
 	}
 
 	// TODO: refactor for problem 4
-	private String interpredCommand(String[] data, String commandName) {
+	private String interpretCommand(String[] data, String commandName) {
 		String result;
 		switch (commandName) {
 			case "add":
