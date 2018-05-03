@@ -1,11 +1,16 @@
-package core.concreteClasses;
+package core.concreteClasses.managers;
 
+import data.abstractions.EmergencyCenterRegister;
 import core.abstractions.EmergencyManagementSystem;
+import data.abstractions.EmergencyRegister;
 
-public class EmergencyManagementSystemImpl implements EmergencyManagementSystem {
+public class  EmergencyManagementSystemImpl implements EmergencyManagementSystem {
+    private EmergencyRegister emergencyRegister;
+    private EmergencyCenterRegister emergencyCenterRegister;
 
-    public EmergencyManagementSystemImpl() {
-
+    public EmergencyManagementSystemImpl(EmergencyRegister emergencyRegister, EmergencyCenterRegister emergencyCenterRegister) {
+        this.emergencyRegister = emergencyRegister;
+        this.emergencyCenterRegister = emergencyCenterRegister;
     }
 
     public String registerPropertyEmergency() {
