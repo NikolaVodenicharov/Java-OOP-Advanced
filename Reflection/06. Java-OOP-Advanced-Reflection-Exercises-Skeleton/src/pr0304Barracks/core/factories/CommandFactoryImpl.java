@@ -1,8 +1,10 @@
 package pr0304Barracks.core.factories;
 
+import pr0304Barracks.annotations.Inject;
 import pr0304Barracks.contracts.*;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 
 public class CommandFactoryImpl implements CommandFactory {
     private static final String COMMANDS_PACKAGE_NAME = "pr0304Barracks.core.commands.";
@@ -22,11 +24,13 @@ public class CommandFactoryImpl implements CommandFactory {
 
         Executable command = null;
 
+
         try{
             String fullName = COMMANDS_PACKAGE_NAME + titleCaseCommand;
             Class commandClass = Class.forName(fullName);
-            Constructor constructor = commandClass.getConstructor(String[].class, Repository.class, UnitFactory.class);
-            command = (Executable) constructor.newInstance(data, repository, unitFactory);
+            Constructor constructor = commandClass.getConstructor(String[].class);
+            command = (Executable) constructor.newInstance((Object)data);
+            injectDependency(commandClass, command);
 
             return command;
         }
@@ -37,7 +41,7 @@ public class CommandFactoryImpl implements CommandFactory {
         return command;
     }
 
-    private static String toTitleCase(String word) {
+    private String toTitleCase(String word) {
         StringBuilder titleCase = new StringBuilder();
         char[] characters = word.toCharArray();
 
@@ -54,5 +58,27 @@ public class CommandFactoryImpl implements CommandFactory {
         }
 
         return titleCase.toString();
+    }
+    private void injectDependency(Class commandClass, Executable command) throws IllegalAccessException {
+        Field[] factoryFields = CommandFactoryImpl.class.getDeclaredFields();
+        Field[] commandFields = commandClass.getDeclaredFields();
+
+        for (Field commandField : commandFields) {
+            if (!commandField.isAnnotationPresent(Inject.class)){
+                continue;
+            }
+
+            commandField.setAccessible(true);
+
+            for (Field factoryField : factoryFields) {
+                if (!factoryField.getType().equals(commandField.getType())){
+                    continue;
+                }
+
+                factoryField.setAccessible(true);
+                commandField.set(command, factoryField.get(this));
+                break;
+            }
+        }
     }
 }

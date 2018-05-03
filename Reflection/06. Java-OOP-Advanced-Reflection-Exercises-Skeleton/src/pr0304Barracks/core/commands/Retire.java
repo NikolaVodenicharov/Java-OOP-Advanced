@@ -1,22 +1,21 @@
 package pr0304Barracks.core.commands;
 
+import pr0304Barracks.annotations.Inject;
 import pr0304Barracks.contracts.Repository;
 import pr0304Barracks.contracts.UnitFactory;
 
 public class Retire extends Command {
+    @Inject
+    private Repository repository;
 
-    public Retire(
-            String[] data,
-            Repository repository,
-            UnitFactory unitFactory) {
-
-        super(data, repository, unitFactory);
+    public Retire(String[] data) {
+        super(data);
     }
 
     @Override
     public String execute() {
         String unitType = this.getData()[1];
-        this.getRepository().removeUnit(unitType);
+        repository.removeUnit(unitType);
         String output = unitType + " retired!";
 
         return output;

@@ -1,9 +1,8 @@
 package pr0304Barracks.core;
 
-import pr0304Barracks.contracts.*;
-import pr0304Barracks.core.factories.CommandFactoryImpl;
-
-import java.lang.reflect.Array;
+import pr0304Barracks.contracts.CommandFactory;
+import pr0304Barracks.contracts.CommandInterpreter;
+import pr0304Barracks.contracts.Executable;
 
 public class CommandInterpreterImpl implements CommandInterpreter {
 
