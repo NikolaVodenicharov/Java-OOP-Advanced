@@ -5,16 +5,16 @@ import io.abstractions.Reader;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class ConsoleReaderLine implements Reader {
+public class ConsoleReader implements Reader {
 
     private BufferedReader bufferedReader;
 
-    public ConsoleReaderLine(BufferedReader bufferedReader){
+    public ConsoleReader(BufferedReader bufferedReader){
         this.bufferedReader = bufferedReader;
     }
 
     @Override
-    public String read() throws IOException {
+    public String readLine() throws IOException {
         String line = bufferedReader.readLine();
         return line;
     }

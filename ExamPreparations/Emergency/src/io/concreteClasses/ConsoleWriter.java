@@ -2,9 +2,9 @@ package io.concreteClasses;
 
 import io.abstractions.Writer;
 
-public class ConsoleWriteLine implements Writer {
+public class ConsoleWriter implements Writer {
     @Override
-    public void write(String text) {
+    public void writeLine(String text) {
         System.out.println(text);
     }
 }
