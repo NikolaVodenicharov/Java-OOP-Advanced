@@ -1,13 +1,13 @@
 package models.concreteClasses.emergencyCenters;
 
 import models.abstractions.Emergency;
-import models.abstractions.EmergencyCenter;
+import models.abstractions.EmergencyCenterImpl;
 import models.concreteClasses.emergencies.OrderEmergency;
 
 import java.util.Collection;
 import java.util.Collections;
 
-public class PoliceCenter extends EmergencyCenter {
+public class PoliceCenter extends EmergencyCenterImpl {
 
     private Collection<OrderEmergency> emergencies;
 

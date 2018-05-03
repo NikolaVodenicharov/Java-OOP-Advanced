@@ -1,10 +1,10 @@
 package models.concreteClasses.emergencies;
 
-import models.abstractions.Emergency;
+import models.abstractions.EmergencyImpl;
 import models.enums.EmergencyLevel;
 import models.concreteClasses.RegistrationTime;
 
-public class PropertyEmergency extends Emergency {
+public class PropertyEmergency extends EmergencyImpl {
 
     private int propertyDamage;
 

@@ -1,11 +1,11 @@
 package models.concreteClasses.emergencyCenters;
 
-import models.abstractions.EmergencyCenter;
+import models.abstractions.EmergencyCenterImpl;
 import models.concreteClasses.emergencies.PropertyEmergency;
 
 import java.util.*;
 
-public class FireCenter extends EmergencyCenter {
+public class FireCenter extends EmergencyCenterImpl {
 
     private Collection<PropertyEmergency> emergencies;
 

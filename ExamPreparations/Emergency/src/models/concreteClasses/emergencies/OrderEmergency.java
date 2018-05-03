@@ -1,11 +1,11 @@
 package models.concreteClasses.emergencies;
 
-import models.abstractions.Emergency;
+import models.abstractions.EmergencyImpl;
 import models.enums.EmergencyLevel;
 import models.enums.OrderEmergencyStatus;
 import models.concreteClasses.RegistrationTime;
 
-public class OrderEmergency extends Emergency {
+public class OrderEmergency extends EmergencyImpl {
 
     private OrderEmergencyStatus status;
 
