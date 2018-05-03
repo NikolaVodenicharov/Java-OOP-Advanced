@@ -1,5 +1,5 @@
 package core.abstractions;
 
 public interface Executable {
-    void execute();
+    String execute(String... args);
 }

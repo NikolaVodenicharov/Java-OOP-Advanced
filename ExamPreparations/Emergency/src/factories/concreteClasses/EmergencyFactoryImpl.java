@@ -1,5 +1,6 @@
-package factories;
+package factories.concreteClasses;
 
+import factories.abstractions.EmergencyFactory;
 import models.abstractions.Emergency;
 import models.concreteClasses.RegistrationTime;
 import models.enums.EmergencyLevel;
@@ -7,10 +8,9 @@ import models.enums.EmergencyLevel;
 import java.lang.reflect.Constructor;
 
 public class EmergencyFactoryImpl implements EmergencyFactory {
-    private static final String EMERGENCIES_PATH = "models.concreteClasses.emergencies.";
 
     public Emergency create(
-            String typeFullName,
+            String fullTypeName,
             String description,
             EmergencyLevel emergencyLevel,
             RegistrationTime registrationTime){
@@ -18,7 +18,7 @@ public class EmergencyFactoryImpl implements EmergencyFactory {
         Emergency emergency = null;
 
         try {
-            Class clazz = Class.forName(typeFullName);
+            Class clazz = Class.forName(fullTypeName);
             Constructor constructor = clazz.getDeclaredConstructor(String.class, EmergencyLevel.class, RegistrationTime.class);
             emergency = (Emergency) constructor.newInstance(description, emergencyLevel, registrationTime);
 

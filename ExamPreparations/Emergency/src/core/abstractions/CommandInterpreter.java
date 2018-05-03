@@ -1,5 +1,5 @@
 package core.abstractions;
 
 public interface CommandInterpreter {
-    Executable interpret();
+    Executable interpret(String[] data);
 }

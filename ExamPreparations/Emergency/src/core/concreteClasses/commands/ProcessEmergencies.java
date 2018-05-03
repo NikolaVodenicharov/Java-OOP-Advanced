@@ -1,4 +1,4 @@
 package core.concreteClasses.commands;
 
-public class ProcessEmergenciesCommand {
+public class ProcessEmergencies {
 }

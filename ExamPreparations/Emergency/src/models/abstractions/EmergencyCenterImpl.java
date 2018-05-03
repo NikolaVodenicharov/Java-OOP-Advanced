@@ -1,6 +1,6 @@
 package models.abstractions;
 
-public abstract class EmergencyCenterImpl implements EmergencyCenter {
+public abstract class  EmergencyCenterImpl implements EmergencyCenter {
 
     private String name;
     private Integer emergencyLeft;

@@ -13,17 +13,17 @@ public class EmergencyCenterRegisterImpl implements EmergencyCenterRegister {
     }
 
     @Override
-    public void enqueueEmergency(EmergencyCenter center) {
+    public void enqueueCenter(EmergencyCenter center) {
         centers.add(center);
     }
 
     @Override
-    public EmergencyCenter dequeueEmergency() {
+    public EmergencyCenter dequeueCenter() {
         return centers.remove();
     }
 
     @Override
-    public EmergencyCenter peekEmergency() {
+    public EmergencyCenter peekCenter() {
         return centers.peek();
     }
 
