@@ -1,22 +1,13 @@
 package models.concreteClasses.emergencyCenters;
 
+import models.abstractions.Emergency;
 import models.abstractions.EmergencyCenterImpl;
-import models.concreteClasses.emergencies.PropertyEmergency;
 
-import java.util.*;
+import java.util.Collection;
 
 public class FireCenter extends EmergencyCenterImpl {
 
-    private Collection<PropertyEmergency> emergencies;
-
-    public FireCenter(String name, Integer emergencyLeft, Collection<PropertyEmergency> emergencies) {
-        super(name, emergencyLeft);
-
-        this.emergencies = emergencies;
-    }
-
-    @Override
-    public Collection<PropertyEmergency> getEmergencies() {
-        return Collections.unmodifiableCollection(emergencies);
+    public FireCenter(String name, Integer emergencyLeft, Collection<Emergency> emergencies) {
+        super(name, emergencyLeft, emergencies);
     }
 }

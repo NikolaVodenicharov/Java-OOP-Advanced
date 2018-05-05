@@ -5,6 +5,7 @@ import java.util.Collection;
 public interface EmergencyCenter {
     String getName();
     Integer getEmergencyLeft();
-    Collection<? extends Emergency> getEmergencies();
+    Collection<Emergency> getEmergencies();
+    void addEmergency(Emergency emergency);
     boolean isForRetirement();
 }
