@@ -28,7 +28,7 @@ public class EmergencyCenterRegisterImpl implements EmergencyCenterRegister {
     }
 
     @Override
-    public Boolean isEmpty() {
-        return centers.isEmpty();
+    public int size() {
+        return centers.size();
     }
 }

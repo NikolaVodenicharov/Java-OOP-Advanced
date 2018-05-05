@@ -6,5 +6,5 @@ public interface EmergencyCenterRegister {
     void enqueueCenter(EmergencyCenter center);
     EmergencyCenter dequeueCenter();
     EmergencyCenter peekCenter();
-    Boolean isEmpty();
+    int size();
 }
