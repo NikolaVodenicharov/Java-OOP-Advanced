@@ -1,8 +1,8 @@
-package factories.abstractions;
+package factories;
 
-import models.abstractions.Emergency;
-import models.concreteClasses.RegistrationTime;
-import models.enums.EmergencyLevel;
+import models.emergencies.Emergency;
+import models.emergencies.Utils.RegistrationTime;
+import models.emergencies.Enums.EmergencyLevel;
 
 public interface EmergencyFactory {
     Emergency create(String fullTypeName, String description, EmergencyLevel emergencyLevel, RegistrationTime registrationTime);

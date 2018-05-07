@@ -1,7 +1,6 @@
-package factories.concreteClasses;
+package factories;
 
-import factories.abstractions.EmergencyCenterFactory;
-import models.abstractions.EmergencyCenter;
+import models.emergencyCenters.EmergencyCenter;
 
 import java.lang.reflect.Constructor;
 

@@ -1,9 +1,9 @@
-package factories.concreteClasses;
+package factories;
 
-import factories.abstractions.EmergencyFactory;
-import models.abstractions.Emergency;
-import models.concreteClasses.RegistrationTime;
-import models.enums.EmergencyLevel;
+import models.emergencies.Emergency;
+import models.emergencies.Utils.RegistrationTime;
+import models.emergencies.Enums.EmergencyLevel;
+import models.emergencies.Utils.RegistrationTimeImpl;
 
 import java.lang.reflect.Constructor;
 
@@ -19,7 +19,7 @@ public class EmergencyFactoryImpl implements EmergencyFactory {
 
         try {
             Class clazz = Class.forName(fullTypeName);
-            Constructor constructor = clazz.getDeclaredConstructor(String.class, EmergencyLevel.class, RegistrationTime.class);
+            Constructor constructor = clazz.getDeclaredConstructor(String.class, EmergencyLevel.class, RegistrationTimeImpl.class);
             emergency = (Emergency) constructor.newInstance(description, emergencyLevel, registrationTime);
 
         } catch (ReflectiveOperationException e) {

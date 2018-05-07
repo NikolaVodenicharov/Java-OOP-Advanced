@@ -1,6 +1,6 @@
-package factories.abstractions;
+package factories;
 
-import models.abstractions.EmergencyCenter;
+import models.emergencyCenters.EmergencyCenter;
 
 public interface EmergencyCenterFactory{
     EmergencyCenter create(String fullTypeName, String name, Integer emergencyLeft);
