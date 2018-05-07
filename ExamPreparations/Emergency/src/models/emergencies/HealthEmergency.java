@@ -1,8 +1,7 @@
-package models.concreteClasses.emergencies;
+package models.emergencies;
 
-import models.abstractions.EmergencyImpl;
-import models.enums.EmergencyLevel;
-import models.concreteClasses.RegistrationTime;
+import models.emergencies.Enums.EmergencyLevel;
+import models.emergencies.Utils.RegistrationTime;
 
 public class HealthEmergency extends EmergencyImpl {
 
@@ -20,9 +19,14 @@ public class HealthEmergency extends EmergencyImpl {
     private void setCasualtiesCount(int casualtiesCount){
 
         if (casualtiesCount < 0){
-            throw new IllegalArgumentException("Damaged properties can not be negative number.");
+            throw new IllegalArgumentException("Casualties can not be negative number.");
         }
 
         this.casualtiesCount = casualtiesCount;
+    }
+
+    @Override
+    public int specificInfo() {
+        return casualtiesCount;
     }
 }

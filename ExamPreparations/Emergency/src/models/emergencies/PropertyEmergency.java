@@ -1,8 +1,7 @@
-package models.concreteClasses.emergencies;
+package models.emergencies;
 
-import models.abstractions.EmergencyImpl;
-import models.enums.EmergencyLevel;
-import models.concreteClasses.RegistrationTime;
+import models.emergencies.Enums.EmergencyLevel;
+import models.emergencies.Utils.RegistrationTime;
 
 public class PropertyEmergency extends EmergencyImpl {
 
@@ -15,6 +14,11 @@ public class PropertyEmergency extends EmergencyImpl {
             int damagedProperties) {
         super(description, emergencyLevel, registrationTime);
         setPropertyDamage(damagedProperties);
+    }
+
+    @Override
+    public int specificInfo() {
+        return propertyDamage;
     }
 
     private void setPropertyDamage(int propertyDamage){

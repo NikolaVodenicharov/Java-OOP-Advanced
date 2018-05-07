@@ -1,9 +1,8 @@
-package models.concreteClasses.emergencies;
+package models.emergencies;
 
-import models.abstractions.EmergencyImpl;
-import models.enums.EmergencyLevel;
-import models.enums.OrderEmergencyStatus;
-import models.concreteClasses.RegistrationTime;
+import models.emergencies.Enums.EmergencyLevel;
+import models.emergencies.Enums.OrderEmergencyStatus;
+import models.emergencies.Utils.RegistrationTime;
 
 public class OrderEmergency extends EmergencyImpl {
 
@@ -16,5 +15,10 @@ public class OrderEmergency extends EmergencyImpl {
             OrderEmergencyStatus status) {
         super(description, emergencyLevel, registrationTime);
         this.status = status;
+    }
+
+    @Override
+    public int specificInfo() {
+        return status.getValue();
     }
 }

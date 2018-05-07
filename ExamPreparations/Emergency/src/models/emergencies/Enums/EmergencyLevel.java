@@ -1,4 +1,4 @@
-package models.enums;
+package models.emergencies.Enums;
 
 public enum EmergencyLevel {
     MINOR,

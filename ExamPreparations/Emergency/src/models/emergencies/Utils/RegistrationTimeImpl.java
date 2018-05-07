@@ -1,30 +1,35 @@
-package models.concreteClasses;
+package models.emergencies.Utils;
 
-public class RegistrationTime {
+public class RegistrationTimeImpl implements RegistrationTime {
     private Integer minutes;
     private Integer hour;
     private Integer day;
     private Integer month;
     private Integer year;
 
-    public RegistrationTime(String registrationTime) {
+    public RegistrationTimeImpl(String registrationTime) {
 
         this.initializeData(
                 this.parseData(registrationTime));
     }
 
+    @Override
     public Integer getMinutes() {
         return minutes;
     }
+    @Override
     public Integer getHour() {
         return hour;
     }
+    @Override
     public Integer getDay() {
         return day;
     }
+    @Override
     public Integer getMonth() {
         return month;
     }
+    @Override
     public Integer getYear() {
         return this.year;
     }
@@ -41,20 +46,20 @@ public class RegistrationTime {
     }
 
     private Integer[] parseData(String registrationTime) {
-        String[] splittedRegistrationTime = registrationTime.split("\\s");
+        String[] splitRegistrationTime = registrationTime.split("\\s");
 
-        String hourAndMinutes = splittedRegistrationTime[0];
-        String date = splittedRegistrationTime[1];
+        String hourAndMinutes = splitRegistrationTime[0];
+        String date = splitRegistrationTime[1];
 
-        String[] splittedHoursAndMinutes = hourAndMinutes.split("\\:");
-        String[] splittedDate = date.split("/");
+        String[] splitHoursAndMinutes = hourAndMinutes.split(":");
+        String[] splitDate = date.split("/");
 
-        Integer hour = Integer.parseInt(splittedHoursAndMinutes[0]);
-        Integer minutes = Integer.parseInt(splittedHoursAndMinutes[1]);
+        Integer hour = Integer.parseInt(splitHoursAndMinutes[0]);
+        Integer minutes = Integer.parseInt(splitHoursAndMinutes[1]);
 
-        Integer day = Integer.parseInt(splittedDate[0]);
-        Integer month = Integer.parseInt(splittedDate[1]);
-        Integer year = Integer.parseInt(splittedDate[2]);
+        Integer day = Integer.parseInt(splitDate[0]);
+        Integer month = Integer.parseInt(splitDate[1]);
+        Integer year = Integer.parseInt(splitDate[2]);
 
         Integer[] parsedData = new Integer[5];
 
