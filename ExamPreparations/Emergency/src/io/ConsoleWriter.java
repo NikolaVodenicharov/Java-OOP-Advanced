@@ -1,6 +1,6 @@
-package io.concreteClasses;
+package io;
 
-import io.abstractions.Writer;
+import io.Writer;
 
 public class ConsoleWriter implements Writer {
     @Override

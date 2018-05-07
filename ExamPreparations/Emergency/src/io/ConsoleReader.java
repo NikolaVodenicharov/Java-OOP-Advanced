@@ -1,6 +1,6 @@
-package io.concreteClasses;
+package io;
 
-import io.abstractions.Reader;
+import io.Reader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
