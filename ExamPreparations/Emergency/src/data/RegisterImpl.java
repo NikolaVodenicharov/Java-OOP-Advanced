@@ -39,8 +39,7 @@ public class RegisterImpl<T> implements Register<T> {
     }
     @Override
     public T peek() {
-        T element = this.elements[0];
-        return element;
+        return this.elements[0];
     }
 
     @Override
