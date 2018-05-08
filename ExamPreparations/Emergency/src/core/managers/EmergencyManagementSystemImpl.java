@@ -1,6 +1,5 @@
-package core.concreteClasses.managers;
+package core.managers;
 
-import core.abstractions.EmergencyManagementSystem;
 import data.Register;
 import data.RegisterImpl;
 import models.emergencies.Emergency;

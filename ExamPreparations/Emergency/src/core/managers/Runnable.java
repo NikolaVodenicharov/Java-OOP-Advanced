@@ -1,4 +1,4 @@
-package core.abstractions;
+package core.managers;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

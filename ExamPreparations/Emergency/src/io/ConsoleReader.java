@@ -4,6 +4,8 @@ import io.Reader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class ConsoleReader implements Reader {
 
@@ -15,7 +17,6 @@ public class ConsoleReader implements Reader {
 
     @Override
     public String readLine() throws IOException {
-        String line = this.bufferedReader.readLine();
-        return line;
+        return this.bufferedReader.readLine();
     }
 }

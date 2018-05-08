@@ -1,4 +1,4 @@
-package core.abstractions;
+package core.managers;
 
 import models.emergencies.Emergency;
 import models.emergencyCenters.EmergencyCenter;

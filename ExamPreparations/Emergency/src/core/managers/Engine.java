@@ -1,8 +1,6 @@
-package core.concreteClasses.managers;
+package core.managers;
 
-import core.abstractions.CommandInterpreter;
-import core.abstractions.Executable;
-import core.abstractions.Runnable;
+import core.commands.Executable;
 import io.Reader;
 import io.Writer;
 
@@ -15,7 +13,7 @@ public class Engine implements Runnable{
     private Writer writer;
     private Reader reader;
 
-    public Engine(CommandInterpreter commandInterpreter, Writer writer, Reader reader) {
+    public Engine( CommandInterpreter commandInterpreter, Writer writer, Reader reader) {
         this.commandInterpreter = commandInterpreter;
         this.writer = writer;
         this.reader = reader;
@@ -25,19 +23,14 @@ public class Engine implements Runnable{
     public void run() throws IOException {
         while(true){
             String line = this.reader.readLine();
-            String[] splitLine = line.split("|");
-            
-            String commandName = splitLine[0];
 
-            boolean isBreak = BREAK_COMMAND.equals(commandName);
-            if (isBreak){
+            if (BREAK_COMMAND.equals(line)){
                 break;
             }
 
-            Executable command = this.commandInterpreter.interpret(commandName);
-
+            String[] arguments = line.split("[|]+");
+            Executable command = this.commandInterpreter.interpret(arguments);
             String result = command.execute();
-
             this.writer.writeLine(result);
         }
     }
