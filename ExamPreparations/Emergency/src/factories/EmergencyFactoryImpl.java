@@ -12,17 +12,26 @@ public class EmergencyFactoryImpl implements EmergencyFactory {
     public Emergency create(
             String fullTypeName,
             String description,
-            EmergencyLevel emergencyLevel,
-            RegistrationTime registrationTime){
+            String emergencyLevel,
+            String registrationTime){
 
         Emergency emergency = null;
 
         try {
             Class clazz = Class.forName(fullTypeName);
-            Constructor constructor = clazz.getDeclaredConstructor(String.class, EmergencyLevel.class, RegistrationTimeImpl.class);
-            emergency = (Emergency) constructor.newInstance(description, emergencyLevel, registrationTime);
+            Constructor constructor =
+                    clazz.getDeclaredConstructor(
+                            String.class,
+                            EmergencyLevel.class,
+                            RegistrationTimeImpl.class);
 
-        } catch (ReflectiveOperationException e) {
+            EmergencyLevel level = EmergencyLevel.valueOf(emergencyLevel.toUpperCase());
+            RegistrationTime time = new RegistrationTimeImpl(registrationTime);
+
+            emergency = (Emergency) constructor.newInstance(description, level, time);
+
+        }
+        catch (ReflectiveOperationException e) {
             e.printStackTrace();
         }
 
