@@ -1,16 +1,18 @@
 package data;
 
-import data.Register;
-
 public class RegisterImpl<T> implements Register<T> {
 
-    private static final Integer INITIAL_SIZE = 16;
+    private static final Integer INITIAL_CAPACITY = 16;
     private T[] elements;
     private Integer currentSize;
     private Integer nextIndex;
 
     public RegisterImpl() {
-        this.elements = (T[]) new Object[INITIAL_SIZE];
+        this(INITIAL_CAPACITY);
+    }
+
+    public RegisterImpl(int initialCapacity){
+        this.elements = (T[]) new Object[initialCapacity];
         this.currentSize = 0;
         this.nextIndex = 0;
     }
@@ -43,14 +45,12 @@ public class RegisterImpl<T> implements Register<T> {
 
     @Override
     public int Size() {
-        int size = currentSize + 1;
-        return size;
+        return currentSize;
     }
 
     @Override
     public Boolean isEmpty() {
-        boolean isEmpty = this.currentSize == 0;
-        return isEmpty;
+        return this.currentSize == 0;
     }
 
     private void incrementNextIndex() {
