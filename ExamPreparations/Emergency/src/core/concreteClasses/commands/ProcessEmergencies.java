@@ -1,4 +1,22 @@
 package core.concreteClasses.commands;
 
-public class ProcessEmergencies {
+import annotations.InjectArgs;
+import annotations.InjectType;
+import core.abstractions.Command;
+import core.abstractions.EmergencyManagementSystem;
+
+public class ProcessEmergencies extends Command {
+
+    @InjectType
+    private String emergencyType;
+    @InjectArgs
+    private EmergencyManagementSystem emergencyManagementSytem;
+
+
+    @Override
+    public String execute(String... args) {
+        String message = emergencyManagementSytem.processEmergencies(emergencyType);
+
+        return message;
+    }
 }

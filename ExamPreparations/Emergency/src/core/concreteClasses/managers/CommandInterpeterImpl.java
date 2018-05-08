@@ -2,21 +2,26 @@ package core.concreteClasses.managers;
 
 import core.abstractions.CommandInterpreter;
 import core.abstractions.Executable;
-import factories.abstractions.EmergencyFactory;
+
+import java.lang.reflect.Constructor;
 
 public class CommandInterpeterImpl implements CommandInterpreter {
-
-    private EmergencyFactory emergencyFactory;
-
-    public CommandInterpeterImpl(EmergencyFactory emergencyFactory) {
-        this.emergencyFactory = emergencyFactory;
-    }
+    private static final String COMMAND_PACKAGE_PATH = "core.concreteClasses.command";
 
     @Override
-    public Executable interpret(String[] data) {
-
-
+    public Executable interpret(String... data) {
+        String commandName = data[0];
+        String fullName = COMMAND_PACKAGE_PATH + "." + commandName;
         Executable command = null;
+
+        try {
+            Class clazz = Class.forName(fullName);
+            Constructor constructor = clazz.getDeclaredConstructor();
+            command = (Executable) constructor.newInstance();
+
+        } catch (ReflectiveOperationException e) {
+            e.printStackTrace();
+        }
 
         return command;
     }

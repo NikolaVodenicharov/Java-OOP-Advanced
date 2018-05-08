@@ -1,30 +1,24 @@
 package core.concreteClasses.commands;
 
-import annotations.Inject;
+import annotations.InjectArgs;
 import core.abstractions.Command;
-import data.abstractions.EmergencyCenterRegister;
-import factories.abstractions.EmergencyCenterFactory;
-import models.abstractions.EmergencyCenter;
+import core.abstractions.EmergencyManagementSystem;
+import factories.EmergencyCenterFactory;
+import models.emergencyCenters.EmergencyCenter;
 
 public class RegisterMedicalCenter extends Command {
-    private static final String FULL_NAME = "models.concreteClasses.emergencyCenters.MedicalCenter";
-    private static final String MESSAGE = "Registered Medical Service Emergency center – %s.";
+    private static final String FULL_NAME = "models.emergencyCenters.MedicalServiceCenter";
 
-    @Inject
-    private EmergencyCenterRegister register;
-    @Inject
+    @InjectArgs
+    private EmergencyManagementSystem emergencyManagementSytem;
+    @InjectArgs
     private EmergencyCenterFactory factory;
 
     @Override
     public String execute(String... args) {
-        String name = args[0];
-        Integer emergencyLeft = Integer.parseInt(args[1]);
+        EmergencyCenter center = factory.create(FULL_NAME, args[0], args[1]);
+        String message = emergencyManagementSytem.registerMedicalServiceCenter(center);
 
-        EmergencyCenter center = factory.create(FULL_NAME, name, emergencyLeft);
-        register.enqueueCenter(center);
-
-        String output = String.format(MESSAGE, name);
-
-        return output;
+        return message;
     }
 }
