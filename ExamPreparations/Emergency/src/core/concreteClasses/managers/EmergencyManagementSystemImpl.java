@@ -18,6 +18,7 @@ public class  EmergencyManagementSystemImpl implements EmergencyManagementSystem
 
     private Map<String, String> emergencyCorrespondingCenterType;
 
+    private int totalProcessedEmergencies;
     private int totalPropertyDamageFixed;
     private int totalHealthCasualtiesSaved;
     private int totalSpecialCasesProcessed;
@@ -99,43 +100,44 @@ public class  EmergencyManagementSystemImpl implements EmergencyManagementSystem
 
     @Override
     public String processEmergencies(String emergencyType) {
-
         Register<Emergency> emergencies = this.emergencyRegisters.get(emergencyType);
 
         String centerType = this.emergencyCorrespondingCenterType.get(emergencyType);
-        Register<EmergencyCenter> centers = this.emergencyCenterRegisters.get(centerType);
+        Register<EmergencyCenter> availableCenters = this.emergencyCenterRegisters.get(centerType);
 
-        Register<EmergencyCenter> busyCenters = new RegisterImpl<>(centers.size());
+        Register<EmergencyCenter> busyCenters = new RegisterImpl<>(availableCenters.size());
 
-        int emergencySpecificInfo = 0;
-
-        // Process emergencies and not write retired centers in busyCenters.
         while(true){
-
             if (emergencies.isEmpty()){
                 break;
             }
-
-            if (centers.isEmpty()){
+            if (availableCenters.isEmpty()){
                 break;
             }
 
-
-            Emergency emergency = emergencies.dequeue();
-            emergencySpecificInfo += emergency.specificInfo();
-
-            EmergencyCenter center = centers.dequeue();
-            center.processEmergency();
-
-            // Skip to add id back.
-            if (center.isForRetirement()){
-                continue;
-            }
-
-            busyCenters.enqueue(center);
+            this.centerProcessEmergency(availableCenters, busyCenters);
+            this.removeEmergency(emergencyType, emergencies);
         }
 
-        switch(emergencyType){
+        this.restartBusyCenters(availableCenters, busyCenters);
+
+        return this.messageProcessResult(emergencies, emergencyType);
+    }
+    private void centerProcessEmergency(Register<EmergencyCenter> availableCenters, Register<EmergencyCenter> busyCenters){
+        EmergencyCenter center = availableCenters.dequeue();
+        center.processEmergency();
+
+        if (!center.isForRetirement()){
+            busyCenters.enqueue(center);
+        }
+    }
+    private void removeEmergency(String emergencyType, Register<Emergency> emergencies) {
+        Emergency emergency = emergencies.dequeue();
+        this.totalProcessedEmergencies++;
+        this.gatherStatisticInfo(emergencyType, emergency.specificInfo());
+    }
+    private void gatherStatisticInfo(String emergencyType, int emergencySpecificInfo){
+        switch (emergencyType) {
             case "Property":
                 this.totalPropertyDamageFixed += emergencySpecificInfo;
                 break;
@@ -146,36 +148,67 @@ public class  EmergencyManagementSystemImpl implements EmergencyManagementSystem
             default:
                 break;
         }
-
-
-
-        // Return not retired centers that were processing emergencies back to the main register.
+    }
+    private void restartBusyCenters(Register<EmergencyCenter> availableCenters, Register<EmergencyCenter> busyCenters){
         while(true){
             if (busyCenters.isEmpty()){
                 break;
             }
 
             EmergencyCenter center = busyCenters.dequeue();
-            centers.enqueue(center);
+            availableCenters.enqueue(center);
         }
-
-
-        // Return message depend of success of processing emergencies.
+    }
+    private String messageProcessResult(Register<Emergency> emergencies, String emergencyType){
         if (!emergencies.isEmpty()){
             return String.format("%s Emergencies left to process: %s.", emergencyType, emergencies.size());
         }
 
         return String.format("Successfully responded to all %s emergencies.", emergencyType);
     }
+
     @Override
     public String emergencyReport() {
+        StringBuilder message = new StringBuilder();
+
+        message.append("PRRM Services Live Statistics")
+                .append(System.lineSeparator());
+
+        message.append(String.format(
+                        "Fire Service Centers: %s",
+                        this.emergencyCenterRegisters.get("FireServiceCenter").size()))
+                .append(System.lineSeparator())
+                .append(String.format(
+                        "Medical Service Centers: %s",
+                        this.emergencyCenterRegisters.get("MedicalServiceCenter").size()))
+                .append(System.lineSeparator())
+                .append(String.format(
+                        "Police Service Centers: %s",
+                        this.emergencyCenterRegisters.get("PoliceServiceCenter").size()))
+                .append(System.lineSeparator());
+
+        message.append(String.format("Total Processed Emergencies: %s", this.totalProcessedEmergencies))
+                .append(System.lineSeparator())
+                .append(String.format("Currently Registered Emergencies: %s", this.getCurrentlyRegisteredEmergenciesCount()))
+                .append(System.lineSeparator());
+
+        message.append(String.format("Total Property Damage Fixed: %s", this.totalPropertyDamageFixed))
+                .append(System.lineSeparator())
+                .append(String.format("Total Health Casualties Saved: %s", this.totalHealthCasualtiesSaved))
+                .append(System.lineSeparator())
+                .append(String.format("Total Special Cases Processed: %s", this.totalSpecialCasesProcessed));
 
 
+        return message.toString();
+    }
+    private int getCurrentlyRegisteredEmergenciesCount(){
+        int counter = 0;
 
+        for (Map.Entry<String, Register<Emergency>> entry : emergencyRegisters.entrySet()) {
+            counter += entry.getValue().size();
+        }
 
-
-
-        return null;
+        return counter;
     }
 
 
