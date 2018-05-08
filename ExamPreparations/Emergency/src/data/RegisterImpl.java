@@ -43,7 +43,7 @@ public class RegisterImpl<T> implements Register<T> {
     }
 
     @Override
-    public int Size() {
+    public int size() {
         return currentSize;
     }
 
