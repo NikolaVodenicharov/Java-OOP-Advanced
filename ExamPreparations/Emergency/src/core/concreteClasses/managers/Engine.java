@@ -24,7 +24,7 @@ public class Engine implements Runnable{
     @Override
     public void run() throws IOException {
         while(true){
-            String line = reader.readLine();
+            String line = this.reader.readLine();
             String[] splitLine = line.split("|");
             
             String commandName = splitLine[0];
@@ -34,11 +34,11 @@ public class Engine implements Runnable{
                 break;
             }
 
-            Executable command = commandInterpreter.interpret(commandName);
+            Executable command = this.commandInterpreter.interpret(commandName);
 
             String result = command.execute();
 
-            writer.writeLine(result);
+            this.writer.writeLine(result);
         }
     }
 }

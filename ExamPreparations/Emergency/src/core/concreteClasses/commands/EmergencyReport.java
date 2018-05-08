@@ -11,7 +11,7 @@ public class EmergencyReport extends Command {
 
     @Override
     public String execute(String... args) {
-        String message = emergencyManagementSytem.emergencyReport();
+        String message = this.emergencyManagementSytem.emergencyReport();
 
         return message;
     }

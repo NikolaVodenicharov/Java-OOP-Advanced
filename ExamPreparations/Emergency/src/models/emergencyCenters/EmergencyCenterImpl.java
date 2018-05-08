@@ -11,7 +11,7 @@ public abstract class  EmergencyCenterImpl implements EmergencyCenter {
 
     @Override
     public String getName() {
-        return name;
+        return this.name;
     }
     @Override
     public void processEmergency(){

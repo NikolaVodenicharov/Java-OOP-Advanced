@@ -15,7 +15,7 @@ public class ProcessEmergencies extends Command {
 
     @Override
     public String execute(String... args) {
-        String message = emergencyManagementSytem.processEmergencies(emergencyType);
+        String message = this.emergencyManagementSytem.processEmergencies(emergencyType);
 
         return message;
     }

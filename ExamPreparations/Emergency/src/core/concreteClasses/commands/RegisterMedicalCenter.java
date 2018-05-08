@@ -16,8 +16,8 @@ public class RegisterMedicalCenter extends Command {
 
     @Override
     public String execute(String... args) {
-        EmergencyCenter center = factory.create(FULL_NAME, args[0], args[1]);
-        String message = emergencyManagementSytem.registerMedicalServiceCenter(center);
+        EmergencyCenter center = this.factory.create(FULL_NAME, args[0], args[1]);
+        String message = this.emergencyManagementSytem.registerMedicalServiceCenter(center);
 
         return message;
     }

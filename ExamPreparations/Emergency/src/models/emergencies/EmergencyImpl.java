@@ -17,21 +17,22 @@ public abstract class EmergencyImpl implements Emergency {
 
     @Override
     public String getDescription() {
-        return description;
+        return this.description;
     }
     @Override
     public EmergencyLevel getEmergencyLevel() {
-        return emergencyLevel;
+        return this.emergencyLevel;
     }
     @Override
     public RegistrationTime getRegistrationTime() {
-        return registrationTime;
+        return this.registrationTime;
     }
 
     private void setDescription(String description) {
         if (description.length() < 3){
             throw new IllegalArgumentException("Description can not be less than 3 symbols");
         }
+
         this.description = description;
     }
 }

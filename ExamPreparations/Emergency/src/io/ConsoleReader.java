@@ -15,7 +15,7 @@ public class ConsoleReader implements Reader {
 
     @Override
     public String readLine() throws IOException {
-        String line = bufferedReader.readLine();
+        String line = this.bufferedReader.readLine();
         return line;
     }
 }

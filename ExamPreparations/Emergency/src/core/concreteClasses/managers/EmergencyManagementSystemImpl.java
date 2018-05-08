@@ -15,7 +15,12 @@ public class  EmergencyManagementSystemImpl implements EmergencyManagementSystem
 
     private Map<String, Register<Emergency>> emergencyRegisters;
     private Map<String, Register<EmergencyCenter>> emergencyCenterRegisters;
+
     private Map<String, String> emergencyCorrespondingCenterType;
+
+    private int totalPropertyDamageFixed;
+    private int totalHealthCasualtiesSaved;
+    private int totalSpecialCasesProcessed;
 
     public EmergencyManagementSystemImpl(
             Map<String, Register<Emergency>> emergencyRegisters,
@@ -23,31 +28,31 @@ public class  EmergencyManagementSystemImpl implements EmergencyManagementSystem
             Map<String, String> emergencyCorrespondingCenterType){
         this.emergencyRegisters = emergencyRegisters;
         this.emergencyCenterRegisters = emergencyCenterRegisters;
-        setEmergencyCorrespondingCenterType(emergencyCorrespondingCenterType);
+        this.setEmergencyCorrespondingCenterType(emergencyCorrespondingCenterType);
     }
 
     @Override
     public String registerPropertyEmergency(Emergency emergency) {
-        String message = registerEmergency(emergency);
+        String message = this.registerEmergency(emergency);
         return message;
     }
     @Override
     public String registerHealthEmergency(Emergency emergency) {
-        String message = registerEmergency(emergency);
+        String message = this.registerEmergency(emergency);
         return message;
     }
     @Override
     public String registerOrderEmergency(Emergency emergency) {
-        String message = registerEmergency(emergency);
+        String message = this.registerEmergency(emergency);
         return message;
     }
     private String registerEmergency(Emergency emergency){
         String simpleName = emergency.getClass().getSimpleName();
-        if (!emergencyRegisters.containsKey(simpleName)){
-            emergencyRegisters.put(simpleName, new RegisterImpl<>());
+        if (!this.emergencyRegisters.containsKey(simpleName)){
+            this.emergencyRegisters.put(simpleName, new RegisterImpl<>());
         }
 
-        emergencyRegisters.get(simpleName).enqueue(emergency);
+        this.emergencyRegisters.get(simpleName).enqueue(emergency);
 
         String message =
                 String.format(
@@ -61,27 +66,27 @@ public class  EmergencyManagementSystemImpl implements EmergencyManagementSystem
 
     @Override
     public String registerFireServiceCenter(EmergencyCenter center) {
-        String message = registerEmergencyCenter(center);
+        String message = this.registerEmergencyCenter(center);
         return message;
     }
     @Override
     public String registerMedicalServiceCenter(EmergencyCenter center) {
-        String message = registerEmergencyCenter(center);
+        String message = this.registerEmergencyCenter(center);
         return message;
     }
     @Override
     public String registerPoliceServiceCenter(EmergencyCenter center) {
-        String message = registerEmergencyCenter(center);
+        String message = this.registerEmergencyCenter(center);
         return message;
     }
     private String registerEmergencyCenter(EmergencyCenter center){
         String simpleName = center.getClass().getSimpleName();
 
-        if (!emergencyCenterRegisters.containsKey(simpleName)){
-            emergencyCenterRegisters.put(simpleName, new RegisterImpl<>());
+        if (!this.emergencyCenterRegisters.containsKey(simpleName)){
+            this.emergencyCenterRegisters.put(simpleName, new RegisterImpl<>());
         }
 
-        emergencyCenterRegisters.get(simpleName).enqueue(center);
+        this.emergencyCenterRegisters.get(simpleName).enqueue(center);
 
         String output =
                 String.format(
@@ -95,12 +100,14 @@ public class  EmergencyManagementSystemImpl implements EmergencyManagementSystem
     @Override
     public String processEmergencies(String emergencyType) {
 
-        Register<Emergency> emergencies = emergencyRegisters.get(emergencyType);
+        Register<Emergency> emergencies = this.emergencyRegisters.get(emergencyType);
 
-        String centerType = emergencyCorrespondingCenterType.get(emergencyType);
-        Register<EmergencyCenter> centers = emergencyCenterRegisters.get(centerType);
+        String centerType = this.emergencyCorrespondingCenterType.get(emergencyType);
+        Register<EmergencyCenter> centers = this.emergencyCenterRegisters.get(centerType);
 
         Register<EmergencyCenter> busyCenters = new RegisterImpl<>(centers.size());
+
+        int emergencySpecificInfo = 0;
 
         // Process emergencies and not write retired centers in busyCenters.
         while(true){
@@ -113,8 +120,9 @@ public class  EmergencyManagementSystemImpl implements EmergencyManagementSystem
                 break;
             }
 
-            // Emergency variable is not used. It can be removed.
+
             Emergency emergency = emergencies.dequeue();
+            emergencySpecificInfo += emergency.specificInfo();
 
             EmergencyCenter center = centers.dequeue();
             center.processEmergency();
@@ -126,6 +134,20 @@ public class  EmergencyManagementSystemImpl implements EmergencyManagementSystem
 
             busyCenters.enqueue(center);
         }
+
+        switch(emergencyType){
+            case "Property":
+                this.totalPropertyDamageFixed += emergencySpecificInfo;
+                break;
+            case "Health":
+                this.totalHealthCasualtiesSaved += emergencySpecificInfo;
+            case "Order":
+                this.totalSpecialCasesProcessed += emergencySpecificInfo;
+            default:
+                break;
+        }
+
+
 
         // Return not retired centers that were processing emergencies back to the main register.
         while(true){
@@ -147,6 +169,12 @@ public class  EmergencyManagementSystemImpl implements EmergencyManagementSystem
     }
     @Override
     public String emergencyReport() {
+
+
+
+
+
+
         return null;
     }
 

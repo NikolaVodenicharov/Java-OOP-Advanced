@@ -15,19 +15,19 @@ public class RegistrationTimeImpl implements RegistrationTime {
 
     @Override
     public Integer getMinutes() {
-        return minutes;
+        return this.minutes;
     }
     @Override
     public Integer getHour() {
-        return hour;
+        return this.hour;
     }
     @Override
     public Integer getDay() {
-        return day;
+        return this.day;
     }
     @Override
     public Integer getMonth() {
-        return month;
+        return this.month;
     }
     @Override
     public Integer getYear() {

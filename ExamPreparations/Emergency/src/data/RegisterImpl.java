@@ -44,7 +44,7 @@ public class RegisterImpl<T> implements Register<T> {
 
     @Override
     public int size() {
-        return currentSize;
+        return this.currentSize;
     }
 
     @Override
