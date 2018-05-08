@@ -2,11 +2,11 @@ package models.emergencyCenters;
 
 public abstract class  EmergencyCenterImpl implements EmergencyCenter {
     private String name;
-    private Integer emergencyLeft;
+    private Integer processEmergencyLeft;
 
-    protected EmergencyCenterImpl(String name, Integer emergencyLeft) {
+    protected EmergencyCenterImpl(String name, Integer processEmergencyLeft) {
         setName(name);
-        setEmergencyLeft(emergencyLeft);
+        setProcessEmergencyLeft(processEmergencyLeft);
     }
 
     @Override
@@ -14,8 +14,16 @@ public abstract class  EmergencyCenterImpl implements EmergencyCenter {
         return name;
     }
     @Override
+    public void processEmergency(){
+        if (isForRetirement()){
+            throw new IllegalStateException("Center is for retirement");
+        }
+
+        processEmergencyLeft--;
+    }
+    @Override
     public boolean isForRetirement(){
-        return emergencyLeft <= 0;
+        return processEmergencyLeft <= 0;
     }
 
     private void setName(String name) {
@@ -25,10 +33,10 @@ public abstract class  EmergencyCenterImpl implements EmergencyCenter {
 
         this.name = name;
     }
-    private void setEmergencyLeft(Integer emergencyLeft) {
-        if (emergencyLeft < 0){
-            throw new IllegalArgumentException("Emergency left can not be negative number.");
+    private void setProcessEmergencyLeft(Integer processEmergencyLeft) {
+        if (processEmergencyLeft < 0){
+            throw new IllegalArgumentException("Process emergency left can not be negative number.");
         }
-        this.emergencyLeft = emergencyLeft;
+        this.processEmergencyLeft = processEmergencyLeft;
     }
 }
