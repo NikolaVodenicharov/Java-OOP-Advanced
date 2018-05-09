@@ -1,7 +1,7 @@
 package models.emergencies;
 
-import models.emergencies.Enums.EmergencyLevel;
-import models.emergencies.Utils.RegistrationTime;
+import enums.EmergencyLevel;
+import utils.RegistrationTime;
 
 public interface Emergency {
     String getDescription();

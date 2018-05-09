@@ -1,6 +1,6 @@
 package factories;
 
-import models.emergencyCenters.EmergencyCenter;
+import models.centers.EmergencyCenter;
 
 import java.lang.reflect.Constructor;
 

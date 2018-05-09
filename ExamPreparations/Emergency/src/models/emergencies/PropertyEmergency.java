@@ -1,9 +1,9 @@
 package models.emergencies;
 
-import models.emergencies.Enums.EmergencyLevel;
-import models.emergencies.Utils.RegistrationTime;
+import enums.EmergencyLevel;
+import utils.RegistrationTime;
 
-public class PropertyEmergency extends EmergencyImpl {
+public class PropertyEmergency extends BaseEmergency {
 
     private int propertyDamage;
 

@@ -1,6 +1,6 @@
 package factories;
 
-import models.emergencyCenters.EmergencyCenter;
+import models.centers.EmergencyCenter;
 
 public interface EmergencyCenterFactory{
     EmergencyCenter create(String fullTypeName, String name, String processEmergencyLeft);

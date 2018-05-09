@@ -1,12 +1,12 @@
 package models.emergencies;
 
-import models.emergencies.Enums.EmergencyLevel;
-import models.emergencies.Enums.OrderEmergencyStatus;
-import models.emergencies.Utils.RegistrationTime;
+import enums.EmergencyLevel;
+import enums.Status;
+import utils.RegistrationTime;
 
-public class OrderEmergency extends EmergencyImpl {
+public class OrderEmergency extends BaseEmergency {
 
-    private OrderEmergencyStatus status;
+    private Status status;
 
     public OrderEmergency(
             String description,
@@ -23,7 +23,11 @@ public class OrderEmergency extends EmergencyImpl {
     }
 
     private void setStatus(String status){
+        String converted = status.toUpperCase();
+        if (converted.contains("-")){
+            converted = converted.replace("-", "_");
+        }
 
-        this.status = OrderEmergencyStatus.valueOf(status.toUpperCase());
+        this.status = Status.valueOf(converted);
     }
 }

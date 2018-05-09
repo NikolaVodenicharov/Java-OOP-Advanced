@@ -1,11 +1,12 @@
 package factories;
 
 import models.emergencies.Emergency;
-import models.emergencies.Utils.RegistrationTime;
-import models.emergencies.Enums.EmergencyLevel;
-import models.emergencies.Utils.RegistrationTimeImpl;
+import utils.RegistrationTime;
+import enums.EmergencyLevel;
+import utils.RegistrationTimeImpl;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 public class EmergencyFactoryImpl implements EmergencyFactory {
 
@@ -32,10 +33,18 @@ public class EmergencyFactoryImpl implements EmergencyFactory {
 
             emergency = (Emergency) constructor.newInstance(description, level, time, specialInfo);
 
-        }
-        catch (ReflectiveOperationException e) {
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
 
         return emergency;
     }

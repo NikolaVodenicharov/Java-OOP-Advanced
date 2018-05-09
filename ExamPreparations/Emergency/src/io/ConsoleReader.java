@@ -1,11 +1,7 @@
 package io;
 
-import io.Reader;
-
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 public class ConsoleReader implements Reader {
 
@@ -16,7 +12,7 @@ public class ConsoleReader implements Reader {
     }
 
     @Override
-    public String readLine() throws IOException {
+    public String read() throws IOException {
         return this.bufferedReader.readLine();
     }
 }

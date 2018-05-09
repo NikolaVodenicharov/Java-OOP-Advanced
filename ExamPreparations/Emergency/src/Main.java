@@ -1,5 +1,9 @@
-import core.managers.*;
-import core.managers.Runnable;
+import core.EmergencyManagementSystem;
+import core.ManagementSystem;
+import interpreters.Interpreter;
+import interpreters.CommandInterpreter;
+import engines.Engine;
+import engines.Runnable;
 import factories.EmergencyCenterFactory;
 import factories.EmergencyCenterFactoryImpl;
 import factories.EmergencyFactory;
@@ -17,11 +21,11 @@ import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) throws IllegalAccessException, IOException, InvocationTargetException {
-        EmergencyManagementSystem managementSystem =
-                new EmergencyManagementSystemImpl(new HashMap<>(), new HashMap<>(), new HashMap<>());
+        ManagementSystem managementSystem =
+                new EmergencyManagementSystem(new HashMap<>(), new HashMap<>(), new HashMap<>());
         EmergencyFactory emergencyFactory = new EmergencyFactoryImpl();
         EmergencyCenterFactory emergencyCenterFactory = new EmergencyCenterFactoryImpl();
-        CommandInterpreter interpreter = new CommandInterpreterImpl(managementSystem, emergencyFactory, emergencyCenterFactory);
+        Interpreter interpreter = new CommandInterpreter(managementSystem, emergencyFactory, emergencyCenterFactory);
 
         Writer writer = new ConsoleWriter();
 
