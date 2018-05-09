@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class  EmergencyManagementSystemImpl implements EmergencyManagementSystem {
     private static final String REGISTER_EMERGENCY = "Registered Public %s Emergency of level %s at %s.";
-    private static final String REGISTER_EMERGENCY_CENTER = "Registered %s Service Emergency center – %s.";
+    private static final String REGISTER_EMERGENCY_CENTER = "Registered %s Service Emergency Center - %s.";
 
     private Map<String, Register<Emergency>> emergencyRegisters;
     private Map<String, Register<EmergencyCenter>> emergencyCenterRegisters;
@@ -91,7 +91,7 @@ public class  EmergencyManagementSystemImpl implements EmergencyManagementSystem
         String output =
                 String.format(
                         REGISTER_EMERGENCY_CENTER,
-                        simpleName.replace("Emergency", ""),
+                        simpleName.replace("ServiceCenter", ""),
                         center.getName());
 
         return output;
@@ -99,7 +99,7 @@ public class  EmergencyManagementSystemImpl implements EmergencyManagementSystem
 
     @Override
     public String processEmergencies(String emergencyType) {
-        Register<Emergency> emergencies = this.emergencyRegisters.get(emergencyType);
+        Register<Emergency> emergencies = this.emergencyRegisters.get(emergencyType + "Emergency");
 
         String centerType = this.emergencyCorrespondingCenterType.get(emergencyType);
         Register<EmergencyCenter> availableCenters = this.emergencyCenterRegisters.get(centerType);

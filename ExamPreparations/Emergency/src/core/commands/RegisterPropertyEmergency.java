@@ -20,7 +20,7 @@ public class RegisterPropertyEmergency extends Command {
 
     @Override
     public String execute() {
-        Emergency emergency = this.factory.create(FULL_NAME, this.arguments[0], this.arguments[1], this.arguments[2]);
+        Emergency emergency = this.factory.create(FULL_NAME, this.arguments[0], this.arguments[1], this.arguments[2], this.arguments[3]);
         String message = this.getEmergencyManagementSystem().registerPropertyEmergency(emergency);
 
         return message;

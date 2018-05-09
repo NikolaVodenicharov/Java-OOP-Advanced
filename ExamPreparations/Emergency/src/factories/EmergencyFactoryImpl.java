@@ -13,7 +13,8 @@ public class EmergencyFactoryImpl implements EmergencyFactory {
             String fullTypeName,
             String description,
             String emergencyLevel,
-            String registrationTime){
+            String registrationTime,
+            String specialInfo){
 
         Emergency emergency = null;
 
@@ -23,12 +24,13 @@ public class EmergencyFactoryImpl implements EmergencyFactory {
                     clazz.getDeclaredConstructor(
                             String.class,
                             EmergencyLevel.class,
-                            RegistrationTimeImpl.class);
+                            RegistrationTime.class,
+                            String.class);
 
             EmergencyLevel level = EmergencyLevel.valueOf(emergencyLevel.toUpperCase());
             RegistrationTime time = new RegistrationTimeImpl(registrationTime);
 
-            emergency = (Emergency) constructor.newInstance(description, level, time);
+            emergency = (Emergency) constructor.newInstance(description, level, time, specialInfo);
 
         }
         catch (ReflectiveOperationException e) {

@@ -11,7 +11,7 @@ public class PropertyEmergency extends EmergencyImpl {
             String description,
             EmergencyLevel emergencyLevel,
             RegistrationTime registrationTime,
-            int damagedProperties) {
+            String damagedProperties) {
         super(description, emergencyLevel, registrationTime);
         setPropertyDamage(damagedProperties);
     }
@@ -21,12 +21,14 @@ public class PropertyEmergency extends EmergencyImpl {
         return propertyDamage;
     }
 
-    private void setPropertyDamage(int propertyDamage){
+    private void setPropertyDamage(String propertyDamage){
 
-        if (propertyDamage < 0){
+        Integer parsedPropertyDamage = Integer.valueOf(propertyDamage);
+
+        if (parsedPropertyDamage < 0){
             throw new IllegalArgumentException("Property damage can not be negative number.");
         }
 
-        this.propertyDamage = propertyDamage;
+        this.propertyDamage = parsedPropertyDamage;
     }
 }

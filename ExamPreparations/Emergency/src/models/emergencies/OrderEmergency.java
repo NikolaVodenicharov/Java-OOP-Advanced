@@ -12,13 +12,18 @@ public class OrderEmergency extends EmergencyImpl {
             String description,
             EmergencyLevel emergencyLevel,
             RegistrationTime registrationTime,
-            OrderEmergencyStatus status) {
+            String status) {
         super(description, emergencyLevel, registrationTime);
-        this.status = status;
+        this.setStatus(status);
     }
 
     @Override
     public int specificInfo() {
         return status.getValue();
+    }
+
+    private void setStatus(String status){
+
+        this.status = OrderEmergencyStatus.valueOf(status.toUpperCase());
     }
 }

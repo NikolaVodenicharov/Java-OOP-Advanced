@@ -67,7 +67,7 @@ public class CommandInterpreterImpl implements CommandInterpreter {
             if (field.getType().equals(interpreterField.getType())){
                 field.setAccessible(true);
                 interpreterField.setAccessible(true);
-                field.set(command, interpreterField);
+                field.set(command, interpreterField.get(this));
                 break;
             }
         }

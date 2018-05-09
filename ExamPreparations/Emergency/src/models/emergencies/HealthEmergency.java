@@ -11,18 +11,19 @@ public class HealthEmergency extends EmergencyImpl {
             String description,
             EmergencyLevel emergencyLevel,
             RegistrationTime registrationTime,
-            int casualtiesCount) {
+            String casualtiesCount) {
         super(description, emergencyLevel, registrationTime);
         setCasualtiesCount(casualtiesCount);
     }
 
-    private void setCasualtiesCount(int casualtiesCount){
+    private void setCasualtiesCount(String casualtiesCount){
+        Integer parsedCasualtiesCount = Integer.valueOf(casualtiesCount);
 
-        if (casualtiesCount < 0){
+        if (parsedCasualtiesCount < 0){
             throw new IllegalArgumentException("Casualties can not be negative number.");
         }
 
-        this.casualtiesCount = casualtiesCount;
+        this.casualtiesCount = parsedCasualtiesCount;
     }
 
     @Override
