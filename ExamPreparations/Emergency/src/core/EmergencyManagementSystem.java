@@ -48,9 +48,13 @@ public class EmergencyManagementSystem implements ManagementSystem {
     }
     private String registerEmergency(Emergency emergency){
         String simpleName = emergency.getClass().getSimpleName();
+
+        initializeEmergencyRegisterIfNeeded(simpleName);
+
+        /*
         if (!this.emergencyRegisters.containsKey(simpleName)){
             this.emergencyRegisters.put(simpleName, new EmergencyRegister<>());
-        }
+        }*/
 
         this.emergencyRegisters.get(simpleName).enqueue(emergency);
 
@@ -62,6 +66,11 @@ public class EmergencyManagementSystem implements ManagementSystem {
                         emergency.getRegistrationTime());
 
         return message;
+    }
+    private void initializeEmergencyRegisterIfNeeded(String simpleName){
+        if (!this.emergencyRegisters.containsKey(simpleName)){
+            this.emergencyRegisters.put(simpleName, new EmergencyRegister<>());
+        }
     }
 
     @Override
@@ -82,9 +91,12 @@ public class EmergencyManagementSystem implements ManagementSystem {
     private String registerEmergencyCenter(EmergencyCenter center){
         String simpleName = center.getClass().getSimpleName();
 
+        /*
         if (!this.emergencyCenterRegisters.containsKey(simpleName)){
             this.emergencyCenterRegisters.put(simpleName, new EmergencyRegister<>());
-        }
+        }*/
+
+        this.initializeCenterRegisterIfNeeded(simpleName);
 
         this.emergencyCenterRegisters.get(simpleName).enqueue(center);
 
@@ -96,12 +108,20 @@ public class EmergencyManagementSystem implements ManagementSystem {
 
         return output;
     }
+    private void initializeCenterRegisterIfNeeded(String simpleName){
+        if (!this.emergencyCenterRegisters.containsKey(simpleName)){
+            this.emergencyCenterRegisters.put(simpleName, new EmergencyRegister<>());
+        }
+    }
 
     @Override
     public String processEmergencies(String emergencyType) {
-        Register<Emergency> emergencies = this.emergencyRegisters.get(emergencyType + "Emergency");
+        String simpleName = emergencyType + "Emergency";
+        this.initializeEmergencyRegisterIfNeeded(simpleName);
+        Register<Emergency> emergencies = this.emergencyRegisters.get(simpleName);
 
         String centerType = this.emergencyCorrespondingCenterType.get(emergencyType);
+        this.initializeCenterRegisterIfNeeded(centerType);
         Register<EmergencyCenter> centers = this.emergencyCenterRegisters.get(centerType);
 
         while(true){
@@ -164,15 +184,18 @@ public class EmergencyManagementSystem implements ManagementSystem {
 
         message.append(String.format(
                         "Fire Service Centers: %s",
-                        this.emergencyCenterRegisters.get("FireServiceCenter").size()))
+                        this.emergencyCenterRegisters.containsKey("FireServiceCenter") ?
+                        this.emergencyCenterRegisters.get("FireServiceCenter").size() : 0))
                 .append(System.lineSeparator())
                 .append(String.format(
                         "Medical Service Centers: %s",
-                        this.emergencyCenterRegisters.get("MedicalServiceCenter").size()))
+                        this.emergencyCenterRegisters.containsKey("MedicalServiceCenter") ?
+                        this.emergencyCenterRegisters.get("MedicalServiceCenter").size() : 0))
                 .append(System.lineSeparator())
                 .append(String.format(
                         "Police Service Centers: %s",
-                        this.emergencyCenterRegisters.get("PoliceServiceCenter").size()))
+                        this.emergencyCenterRegisters.containsKey("PoliceServiceCenter") ?
+                        this.emergencyCenterRegisters.get("PoliceServiceCenter").size() : 0))
                 .append(System.lineSeparator());
 
         message.append(String.format("Total Processed Emergencies: %s", this.totalProcessedEmergencies))
