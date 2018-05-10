@@ -21,8 +21,7 @@ import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) throws IllegalAccessException, IOException, InvocationTargetException {
-        ManagementSystem managementSystem =
-                new EmergencyManagementSystem(new HashMap<>(), new HashMap<>(), new HashMap<>());
+        ManagementSystem managementSystem = new EmergencyManagementSystem();
         EmergencyFactory emergencyFactory = new EmergencyFactoryImpl();
         EmergencyCenterFactory emergencyCenterFactory = new EmergencyCenterFactoryImpl();
         Interpreter interpreter = new CommandInterpreter(managementSystem, emergencyFactory, emergencyCenterFactory);
