@@ -1,15 +1,12 @@
 package models.modules;
 
-public class HeatProcessor implements AbsorbingModule{
-    private int heatAbsorbing;
-
-    @Override
-    public int getHeatAbsorbing() {
-        return 0;
+public class HeatProcessor extends AbstractModule implements AbsorbingModule{
+    protected HeatProcessor(int id, int additionalParameter) {
+        super(id, additionalParameter);
     }
 
     @Override
-    public int getId() {
-        return 0;
+    public int getHeatAbsorbing() {
+        return super.getAdditionalParameter();
     }
 }

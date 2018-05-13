@@ -22,13 +22,11 @@ public class ModuleContainer implements Container {
 
     @Override
     public void addEnergyModule(EnergyModule energyModule) {
-        // energyModule == null ?
-        if (energyModule != null) {
-            throw new IllegalArgumentException();
+        if (energyModule == null) {
+            throw new IllegalArgumentException("Can not add \"null\" module.");
         }
 
-        // create public boolean isCapacityFull();
-        if (this.modulesByInput.size() == this.moduleCapacity) {
+        if (this.isCapacityFull()) {
             this.removeOldestModule();
         }
 
@@ -37,18 +35,24 @@ public class ModuleContainer implements Container {
     }
     @Override
     public void addAbsorbingModule(AbsorbingModule absorbingModule) {
-        // energyModule == null ?
-        if (absorbingModule != null) {
-            throw new IllegalArgumentException();
+        if (absorbingModule == null) {
+            throw new IllegalArgumentException("Can not add \"null\" module.");
         }
 
-        // create public boolean isCapacityFull();
-        if (this.modulesByInput.size() == this.moduleCapacity) {
+        if (this.isCapacityFull()) {
             this.removeOldestModule();
         }
 
         this.absorbingModules.put(absorbingModule.getId(), absorbingModule);
         this.modulesByInput.addLast(absorbingModule);
+    }
+    private boolean isCapacityFull(){
+        return this.modulesByInput.size() == this.moduleCapacity;
+    }
+    private void removeOldestModule() {
+        int removeId = this.modulesByInput.removeFirst().getId();
+        this.energyModules.remove(removeId);
+        this.absorbingModules.remove(removeId);
     }
 
     @Override
@@ -64,17 +68,5 @@ public class ModuleContainer implements Container {
                 .sum();
     }
 
-    private void removeOldestModule() {
-        int removeId = this.modulesByInput.removeFirst().getId();
 
-        // without "!"
-        if(!this.energyModules.containsKey(removeId)) {
-            this.energyModules.remove(removeId);
-        }
-
-        // without "!" and can be "else if"
-        if(!this.absorbingModules.containsKey(removeId)) {
-            this.absorbingModules.remove(removeId);
-        }
-    }
 }

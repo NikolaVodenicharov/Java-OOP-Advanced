@@ -2,7 +2,6 @@ package models.reactors;
 
 import entities.containers.Container;
 import entities.containers.ModuleContainer;
-import models.IdentifiableCounter;
 import models.modules.AbsorbingModule;
 import models.modules.EnergyModule;
 
@@ -11,9 +10,9 @@ public abstract class ReactorImpl implements Reactor{
     private int id;
     private int moduleCount = 0;
 
-    protected ReactorImpl(int moduleCapacity){
+    protected ReactorImpl(int id, int moduleCapacity){
+        this.id = id;
         this.container = new ModuleContainer(moduleCapacity);
-        this.id = IdentifiableCounter.getCount();
     }
 
     @Override

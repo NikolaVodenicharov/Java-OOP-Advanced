@@ -1,15 +1,12 @@
 package models.modules;
 
-public class CryogenRod implements EnergyModule{
-    private int energyOutput;
-
-    @Override
-    public int getEnergyOutput() {
-        return 0;
+public class CryogenRod extends AbstractModule implements EnergyModule{
+    public CryogenRod(int id, int additionalParameter) {
+        super(id, additionalParameter);
     }
 
     @Override
-    public int getId() {
-        return 0;
+    public int getEnergyOutput() {
+        return super.getAdditionalParameter();
     }
 }

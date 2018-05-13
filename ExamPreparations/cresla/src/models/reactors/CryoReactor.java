@@ -3,8 +3,8 @@ package models.reactors;
 public class CryoReactor extends ReactorImpl{
     private int cryoProductionIndex;
 
-    protected CryoReactor(int cryoProductionIndex, int moduleCapacity) {
-        super(moduleCapacity);
+    protected CryoReactor(int id, int moduleCapacity, int cryoProductionIndex) {
+        super(id, moduleCapacity);
         this.cryoProductionIndex = cryoProductionIndex;
     }
 
