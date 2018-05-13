@@ -10,6 +10,7 @@ public class ConsoleReader implements InputReader {
     public ConsoleReader(){
         this.bufferedReader = new BufferedReader(new InputStreamReader(System.in));
     }
+
     @Override
     public String readLine() throws IOException {
         return bufferedReader.readLine();

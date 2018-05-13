@@ -1,17 +1,18 @@
-import models.IdentifiableCounter;
+import core.Engine;
+import core.Runnable;
+import io.ConsoleReader;
+import io.ConsoleWriter;
+import io.InputReader;
+import io.OutputWriter;
+
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        InputReader reader = new ConsoleReader();
+        OutputWriter writer = new ConsoleWriter();
+        Runnable engine = new Engine(reader, writer);
 
-//        HeatProcessor heatProcessor = new HeatProcessor();
-//        HeatProcessor heatProcessor2 = new HeatProcessor();
-//        System.out.println(heatProcessor.getId());
-//        System.out.println(heatProcessor2.getId());
-        for (int i = 0; i < 10; i++) {
-            System.out.println(IdentifiableCounter.getCount());
-
-        }
-
-        System.out.println("hi");
+        engine.run();
     }
 }

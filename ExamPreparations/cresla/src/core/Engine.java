@@ -19,12 +19,14 @@ public class Engine implements Runnable {
         while(true){
             String line = reader.readLine();
 
-            if (line == null && line.trim().isEmpty()){
+            if (line == null || line.trim().isEmpty()){
                 break;
             }
 
             String[] split = line.split("\\s+");
             String command = split[0];
+
+            writer.writeLine(command);
         }
     }
 }
